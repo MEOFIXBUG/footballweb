@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!--begin::Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!--end::Fonts -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/css/bootstrap-select.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/metronic-style.bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/flaticon.css" />
+    <link rel="stylesheet" href="/assets/css/flaticon2.css" />
+    <link rel="stylesheet" href="/assets/css/app.css" />
+
+    @*<title>Trang chủ</title>*@
+    <title>@ViewBag.Title</title>
+</head>
+
+<!-- begin::Body -->
+
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-aside--minimize kt-page--loading">
+
+    <!-- begin:: Page -->
+    <!-- begin:: Header Mobile -->
+    <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed ">
+        <div class="kt-header-mobile__logo">
+            <a href="/Home/Home">
+                <img class="img-fluid" style="width: 40px;" alt="Logo" src="/assets/images/logo.png" />
+            </a>
+        </div>
+        <div class="kt-header-mobile__toolbar">
+            <button class="kt-header-mobile__toolbar-toggler kt-header-mobile__toolbar-toggler"
+                    id="kt_aside_mobile_toggler">
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- end:: Header Mobile -->
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+            <!-- begin:: Aside -->
+            <button class="kt-aside-close " id="kt_aside_close_btn"><i class="fas fa-times"></i></button>
+            <div class="kt-aside kt-aside--fixed kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop"
+                 id="kt_aside">
+
+                <!-- begin:: Brand -->
+                <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
+                    <div class="kt-aside__brand-logo">
+                        <a href="/Home/Home">
+                            <img class="img-fluid" alt="Logo" src="/assets/images/logo.png" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- end:: Brand -->
+                <!-- begin:: Aside Menu -->
+                <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+                    <div id="kt_aside_menu" class="kt-aside-menu kt-aside-menu--dropdown " data-ktmenu-vertical="1"
+                         data-ktmenu-dropdown="1" data-ktmenu-scroll="0">
+                        <ul class="kt-menu__nav ">
+                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here"
+                                aria-haspopup="true" data-ktmenu-submenu-toggle="click"
+                                data-ktmenu-dropdown-toggle-class="kt-aside-menu-overlay--on">
+                                <a href="/Home/Home" class="kt-menu__link">
+                                    <i class="fas fa-home"></i>
+                                    <span class="kt-menu__link-text">Trang Chủ</span>
+                                </a>
+                            </li>
+                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle">
+                                    <i class="fas fa-user"></i>
+                                    <span class="kt-menu__link-text">Quản lý tài khoản</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">Quản lý tài khoản</span>
+                                            </span>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AddAccount" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Tài Khoản</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AccountList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Tài Khoản</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true"
+                                                data-ktmenu-submenu-toggle="hover">
+                                                <a href="/Account/AccountList"
+                                                   class="kt-menu__link kt-menu__toggle">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Tài Khoản</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                                </a>
+                                                <div class="kt-menu__submenu ">
+                                                    <span class="kt-menu__arrow"></span>
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <a href="#"
+                                                               class="kt-menu__link ">
+                                                                <i class="kt-menu__link-icon flaticon-computer"></i><span class="kt-menu__link-text">Pending</span><span class="kt-menu__link-badge">
+                                                                    <span class="kt-badge kt-badge--warning">10</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <a href="#"
+                                                               class="kt-menu__link ">
+                                                                <i class="kt-menu__link-icon flaticon-signs-2"></i><span class="kt-menu__link-text">Urgent</span><span class="kt-menu__link-badge">
+                                                                    <span class="kt-badge kt-badge--danger">6</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <a href="#"
+                                                               class="kt-menu__link ">
+                                                                <i class="kt-menu__link-icon flaticon-clipboard"></i><span class="kt-menu__link-text">Done</span><span class="kt-menu__link-badge">
+                                                                    <span class="kt-badge kt-badge--success">2</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <a href="#"
+                                                               class="kt-menu__link ">
+                                                                <i class="kt-menu__link-icon flaticon-multimedia-2"></i><span class="kt-menu__link-text">Archive</span><span class="kt-menu__link-badge">
+                                                                    <span class="kt-badge kt-badge--info kt-badge--inline">245</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>*@
+                                        @*<li class="kt-menu__item " aria-haspopup="true">
+                                                <a href="#"
+                                                   class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Clients</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true">
+                                                <a href="#"
+                                                   class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Audit</span>
+                                                </a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle">
+                                    <i class="fas fa-route"></i>
+                                    <span class="kt-menu__link-text">Quản lý tuyến đường</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">Quản lý tuyến đường</span>
+                                            </span>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Route/AddRoute" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Tuyến Đường</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AccountList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Tuyến Đường</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AddAccount" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import from Excel</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle">
+                                    <i class="fas fa-bus"></i>
+                                    <span class="kt-menu__link-text">Quản lý Nhà Xe</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">Quản lý Nhà Xe</span>
+                                            </span>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AddAccount" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Nhà Xe</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AccountList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Nhà Xe</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Account/AddAccount" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import from Excel</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- end:: Aside Menu -->
+            </div>
+            <div class="kt-aside-menu-overlay"></div>
+
+            <!-- end:: Aside -->
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+                <!-- begin:: Header -->
+                <div id="kt_header" class="kt-header kt-grid kt-grid--ver kt-header--fixed ">
+
+                    <!-- begin: Header Menu -->
+                    <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
+                        <i class="la la-close"></i>
+                    </button>
+                    <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+                        <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile kt-header-menu--layout- ">
+                            @*<ul class="kt-menu__nav ">
+                                    <li class="kt-menu__item kt-menu__item--active " aria-haspopup="true">
+                                        <a href="/" class="kt-menu__link ">
+                                            <span class="kt-menu__link-text">Trang chủ</span>
+                                        </a>
+                                    </li>
+                                </ul>*@
+                        </div>
+                    </div>
+
+                    <!-- end: Header Menu -->
+                    <!-- begin:: Header Topbar -->
+                    <div class="kt-header__topbar">
+                        <!--begin: User bar -->
+                        <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+                                <img alt="Pic" src="/assets/images/user.png" />
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+
+                                <!--begin: Head -->
+                                <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
+                                    <div class="kt-user-card__avatar">
+                                        <img alt="Pic" src="/assets/images/user.png" />
+                                    </div>
+                                    <div class="kt-user-card__name">
+                                        Admin
+                                    </div>
+                                    <div class="kt-user-card__badge">
+                                        <a href="/Account/UserProfile">
+                                            <button class="btn btn-primary">
+                                                Hồ sơ cá nhân
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!--end: Head -->
+                                <!--begin: Navigation -->
+                                @*<div class="kt-notification">
+                                        <div class="kt-notification__custom kt-space-between">
+                                            <a href="@Url.Action("LogOut","Account")" target="_blank"
+                                               class="btn btn-label btn-label-brand btn-sm btn-bold">Đăng xuất</a>
+                                        </div>
+                                    </div>*@
+                                <div class="kt-notification">
+                                    <div class="kt-notification__custom kt-space-between">
+                                        <a class="btn btn-label btn-label-brand btn-sm btn-bold"
+                                           href="@Url.Action("LogOut", "Account")">Đăng xuất</a>
+                                        <form id="logout-form" action="/client" method="POST" style="display: none;">
+                                            @*@csrf*@
+
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--end: Navigation -->
+                            </div>
+                        </div>
+
+                        <!--end: User bar -->
+                    </div>
+
+                    <!-- end:: Header Topbar -->
+                </div>
+                <!-- end:: Header -->
+                @RenderBody();
+
+                <!-- begin:: Footer -->
+                <div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
+                    <div class="kt-container kt-container--fluid ">
+                        <div class="kt-footer__copyright">
+                            2019&nbsp;&copy;&nbsp;<a href="https://www.bittosolution.vn/" target="_blank"
+                                                     class="kt-link">BitTo Solution</a>
+                        </div>
+                        <div class="kt-footer__menu">
+                            <a href="https://www.bittosolution.vn/ve-chung-toi/" target="_blank"
+                               class="kt-footer__menu-link kt-link">Về chúng tôi</a>
+                            <a href="https://www.bittosolution.vn/lien-he/" target="_blank"
+                               class="kt-footer__menu-link kt-link">Liên hệ khi xảy ra sự cố</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Footer -->
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Page -->
+    <!-- begin::Scrolltop -->
+    <div id="kt_scrolltop" class="kt-scrolltop">
+        <i class="fa fa-arrow-up"></i>
+    </div>
+
+    <!-- end::Scrolltop -->
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#22b9ff",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+    </script>
+
+    <!-- end::Global Config -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tooltip.js/1.3.2/umd/tooltip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.2.0/sticky.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/js/bootstrap-select.min.js"></script>
+
+    <script src="/assets/js/metronic-scripts.bundle.min.js"></script>
+    <script src="/assets/js/storage.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+
+<!-- end::Body -->
+
+</html>
