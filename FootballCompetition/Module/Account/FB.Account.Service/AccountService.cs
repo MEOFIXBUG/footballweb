@@ -11,7 +11,7 @@ namespace FB.Account.Service
     {
         [Dependency]
         public IAccountRepository AccountRepository { get; set; }
-        public AccountModel AcceptLogin(LoginModel model)
+        public LoginModel AcceptLogin(LoginModel model)
         {
             try
             {

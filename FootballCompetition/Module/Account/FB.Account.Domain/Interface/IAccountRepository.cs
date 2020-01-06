@@ -9,6 +9,7 @@ namespace FB.Account.Domain.Interface
 {
     public interface IAccountRepository
     {
-        AccountModel AcceptLogin(LoginModel model);
+        
+        LoginModel AcceptLogin(LoginModel model);
     }
 }

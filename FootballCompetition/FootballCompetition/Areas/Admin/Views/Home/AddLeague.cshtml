@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "AddLeague";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@model FB.League.Domain.Model.LeagueX
+    <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div class="kt-container kt-container--fluid ">
+                <div class="kt-subheader__main">
+                </div>
+            </div>
+        </div>
+        @using (Html.BeginForm("AddLeague", "Home", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.l_ID);
+            <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3>Add/Update</h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="row">
+                            <div class="col-xl-12 row">
+                                <div class="col-xl-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="far fa-save"></i> Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-3">
+                                        <label class="col-form-label">League Name</label>
+                                        @Html.TextBoxFor(m => m.l_name, new { @class = "form-control", @placeholder = "", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.l_name, "", new { @style = "color:red", @class = "msgNumberPlate rexMess" })
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <label class="col-form-label">StartAt</label>
+                                        @Html.TextBoxFor(m => m.l_start, new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.l_start, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <label class="col-form-label">EndAt</label>
+                                        @Html.TextBoxFor(m => m.l_end, new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.l_end, "", new { @style = "color:red", @class = "msgByname rexMess" })
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-3">
+                                        <label class="col-form-label">Number of Teams </label>
+                                        @Html.TextBoxFor(m => m.l_teamNumber, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.l_teamNumber, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <label class="col-form-label">For</label>
+                                        @Html.DropDownListFor(m => m.l_for, new List<SelectListItem> {
+                                            new SelectListItem {Value = "1",Text="country"},
+                                            new SelectListItem {Value = "2",Text="club"}
+                                            }, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.l_for, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <label class="col-form-label">Description</label>
+                                        @Html.TextAreaFor(m => m.l_descript, new { @class = "form-control", @placeholder = "", @style = "height:150px;" })
+                                        @Html.ValidationMessageFor(m => m.l_descript, "", new { @style = "color:red", @class = "msgAmountFloor rexMess" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        @*<label class="col-form-label">Team List</label>*@
+                                        @*<input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" class="form-control" multiple>
+                                        <div class="col-form-label" id="selectedFiles"></div>*@
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="far fa-folder"></i> Update Team List
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+<script src="~/Scripts/sweetalert.min.js"></script>
+
+

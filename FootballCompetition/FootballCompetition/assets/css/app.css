@@ -1,0 +1,76 @@
+:root {
+    --main-color: #22b9ff;
+    --hover-color: #22aaff;
+    --txt-color: white;
+}
+
+.bg-main {
+    background: var(--main-color);
+    color: var(--txt-color);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.kt-datatable .kt-datatable__head th,
+.kt-datatable .kt-datatable__foot th {
+    text-align: center;
+}
+
+.kt-menu__link .svg-inline--fa {
+    margin: 0.5rem;
+}
+
+.kt-menu__item > .kt-menu__link .svg-inline--fa {
+    width: 2rem;
+    height: 2rem;
+    color: #b8bac3;
+}
+
+    .kt-menu__item > .kt-menu__link .svg-inline--fa:hover {
+        color: var(--main-color);
+    }
+
+.kt-menu__item.kt-menu__item--here > .kt-menu__link .svg-inline--fa {
+    color: var(--main-color);
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+button.btn.back {
+    margin: 0rem 0.5rem;
+}
+
+button.btn {
+    margin: 0.25rem 0rem;
+    border-color: var(--main-color);
+    background: var(--main-color);
+    color: var(--txt-color);
+}
+
+    button.btn:hover {
+        border-color: var(--hover-color);
+        background: var(--hover-color);
+    }
+
+.kt-portlet__body .form-control {
+    margin: 0.25rem 0rem;
+}
+
+.kt-form__actions {
+    text-align: center;
+}
+
+.modal .modal-header,
+.modal .modal-footer {
+    justify-content: center;
+}
+
+.modal .modal-header,
+.modal .modal-content .modal-header .modal-title {
+    background: var(--main-color);
+    color: var(--txt-color);
+}

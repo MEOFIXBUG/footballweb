@@ -13,7 +13,7 @@ namespace Infras.Common
 
 
         /// <summary>
-        /// Author:    Haott
+        /// Author:    
         /// Get connection string by db type
         /// </summary>
         /// <param name="dbName"></param>
@@ -61,7 +61,7 @@ namespace Infras.Common
         }
 
         /// <summary>
-        /// Haott
+        /// 
         /// Thực thi lệnh query insert, update, delete
         /// </summary>
         /// <param name="StoredName"></param> chỉ đưa vào tên stored

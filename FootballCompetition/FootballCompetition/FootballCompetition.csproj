@@ -43,10 +43,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -94,6 +103,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\assets\css\app.css" />
+    <Content Include="Areas\Admin\assets\css\flaticon.css" />
+    <Content Include="Areas\Admin\assets\css\flaticon2.css" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon.svg" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon2.svg" />
+    <Content Include="Areas\Admin\assets\css\metronic-style.bundle.min.css" />
+    <Content Include="Areas\Admin\assets\css\print.css" />
+    <Content Include="Areas\Admin\assets\images\bg-profile.jpg" />
+    <Content Include="Areas\Admin\assets\images\en.png" />
+    <Content Include="Areas\Admin\assets\images\logo.png" />
+    <Content Include="Areas\Admin\assets\images\user.png" />
+    <Content Include="Areas\Admin\assets\images\vi.png" />
+    <Content Include="Areas\Admin\assets\js\app.js" />
+    <Content Include="Areas\Admin\assets\js\metronic-scripts.bundle.min.js" />
+    <Content Include="Areas\Admin\assets\js\storage.js" />
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\css\flaticon.css" />
+    <Content Include="assets\css\flaticon2.css" />
+    <Content Include="assets\css\font\Flaticon.svg" />
+    <Content Include="assets\css\font\Flaticon2.svg" />
+    <Content Include="assets\css\metronic-style.bundle.min.css" />
+    <Content Include="assets\css\print.css" />
+    <Content Include="assets\images\bg-profile.jpg" />
+    <Content Include="assets\images\en.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\user.png" />
+    <Content Include="assets\images\vi.png" />
+    <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\metronic-scripts.bundle.min.js" />
+    <Content Include="assets\js\storage.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -103,6 +142,25 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="assets\css\font\Flaticon.eot" />
+    <Content Include="assets\css\font\Flaticon.ttf" />
+    <Content Include="assets\css\font\Flaticon.woff" />
+    <Content Include="assets\css\font\Flaticon2.eot" />
+    <Content Include="assets\css\font\Flaticon2.ttf" />
+    <Content Include="assets\css\font\Flaticon2.woff" />
+    <Content Include="assets\css\font\Flaticon2.woff2" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon.eot" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon.ttf" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon.woff" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon2.eot" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon2.ttf" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon2.woff" />
+    <Content Include="Areas\Admin\assets\css\font\Flaticon2.woff2" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\AddLeague.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\TeamListFile.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -116,7 +174,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
+    <Compile Include="Controllers\Admin\HomeController.cs" />
+    <Compile Include="Controllers\Common\CommonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -125,7 +186,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="App_Data\IoC.config" />
-    <Content Include="ApplicationInsights.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -139,6 +199,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Common\DetailLeague.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -147,7 +208,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
+    <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infras.Common\Infras.Common.csproj">
@@ -165,6 +230,18 @@
     <ProjectReference Include="..\Module\Account\FB.Account.Service\FB.Account.Service.csproj">
       <Project>{9523cce2-4b77-43c3-885f-c4a55af69463}</Project>
       <Name>FB.Account.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\League\FB.League.Domain\FB.League.Domain.csproj">
+      <Project>{0204D40D-0911-4404-B21C-60F8978DF6C4}</Project>
+      <Name>FB.League.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\League\Fb.League.Repository\FB.League.Repository.csproj">
+      <Project>{17897c70-969c-4816-8969-fa22ceab1804}</Project>
+      <Name>FB.League.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\League\FB.League.Service\FB.League.Service.csproj">
+      <Project>{35b175cd-3d06-4f98-a00e-34c810af9cdc}</Project>
+      <Name>FB.League.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

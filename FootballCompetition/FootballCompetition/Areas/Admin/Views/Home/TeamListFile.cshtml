@@ -1,0 +1,294 @@
+﻿
+@{
+    ViewBag.Title = "TeamListFile";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div class="kt-container kt-container--fluid ">
+
+        </div>
+    </div>
+    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            @using (Html.BeginForm("TeamListFile", "Home", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3>Nhập file Excel</h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-4">
+
+                                        <label class="col-form-label">EXCEL</label>
+                                        <input id="leagueID" name="leagueID" type="number" value="@ViewBag.leagueID" hidden />
+                                        <input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" class="form-control" multiple>
+                                        <div class="col-form-label" id="selectedFiles"></div>
+                                        @if (@ViewBag.ERROR != null)
+                                        {
+
+                                            <script>
+                                                alert('@ViewBag.ERROR');
+                                            </script>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+
+                        <div class="col-xl-4">
+                            <label class="col-form-label">EXCEL</label>
+                            <br />
+                            <div>
+                                <input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" multiple>
+                            </div>
+                            <div class="col-form-label" id="selectedFiles"></div>
+                        </div>
+                    </div>*@
+                        <br />
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <button type="submit" id="AddFileExcel" class="btn">
+                                @*<button type="button" id="AddFileExcel" class="btn btn-primary">*@
+                                Add Files
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+                <!-- begin:: Subheader -->
+                <div class="kt-subheader kt-grid__item" id="kt_subheader">
+                    <div class="kt-container kt-container--fluid ">
+                        <div class="kt-subheader__main">
+                            <h3 class="kt-subheader__title">Participant Team</h3>
+
+                            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+
+                            <span class="total-items kt-subheader__desc">Sum: <span id="total"></span></span>
+
+                            <form class="kt-margin-l-20" id="kt_subheader_search_form">
+                                <div class="kt-input-icon kt-input-icon--right kt-subheader__search">
+                                    <input type="text" class="form-control" placeholder="Search..."
+                                           id="generalSearch">
+                                    <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                                        <span><i class="fas fa-search"></i></span>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="kt-subheader__toolbar">
+                            <button class="btn btn-primary" onclick="Generate();">
+                                Generate
+                            </button>
+                            <button class="btn btn-primary" onclick="Del();">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Subheader -->
+                <!-- begin:: Content -->
+                <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+                    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+                        <div class="kt-portlet kt-portlet--mobile">
+                            <div class="kt-datatable"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end:: Content -->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var selDiv = "";
+
+    document.addEventListener("DOMContentLoaded", init, false);
+
+    function init() {
+        document.querySelector('#Fileexcel').addEventListener('change', handleFileSelect, false);
+        selDiv = document.querySelector("#selectedFiles");
+    }
+
+    function handleFileSelect(e) {
+
+        if (!e.target.files) return;
+
+        selDiv.innerHTML = "";
+
+        var files = e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+
+            selDiv.innerHTML += f.name + "<br/>";
+
+        }
+
+    }
+</script>
+<script>
+
+    var datatable;
+    var dataSet = [];
+    let id = $('#leagueID').val();
+    $(document).ready(function () {
+
+
+        var options = {
+            // datasource definition
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        url: '/Common/GetAllTeam?leagueID='+ id,
+                        method: 'GET',
+                        map: function (raw) {
+                            dataSet = raw;
+                            if (typeof raw.meta !== 'undefined') {
+                                $('#total').html(raw.meta.total);
+                            }
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            return dataSet;
+                        },
+                    },
+                },
+                pageSize: 10,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+            },
+            // layout definition
+            layout: {
+                scroll: true,
+                height: 600,
+
+                footer: false
+            },
+            // column sorting
+            sortable: true,
+            pagination: true,
+            search: {
+                input: $('#generalSearch'),
+            },
+            // columns definition
+            columns: [
+                {
+                    field: 't_ID',
+                    title: '#',
+                    sortable: false,
+                    width: 20,
+                    type: 'number',
+                    selector: {
+                        class: 'kt-checkbox--solid'
+                    },
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_NAME',
+                    title: 'Team Name',
+                    textAlign: 'center',
+                    template: function (data) {
+                        return '<div class="kt-user-card-v2">' +
+                            '<div class="kt-user-card-v2__pic">' +
+                            '<div class="kt-badge kt-badge--xl bg-main">' +
+
+                            '</div>' +
+                            '</div>' +
+                            '<div class="kt-user-card-v2__details">' +
+                            '<span class="kt-user-card-v2__name">' + data['t_NAME'] + '</span>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                },
+                {
+                    field: 't_offical_color',
+                    title: 'Offical Color',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_second_color',
+                    title: 'Second Color',
+                    textAlign: 'center',
+                }]
+        };
+
+        datatable = $('.kt-datatable').KTDatatable(options);
+        datatable.on('kt-datatable--on-reloaded', function () {
+            setRowClickEvent();
+        });
+
+        datatable.reload();
+    });
+
+    function Del() {
+       let chkCheckeds = datatable.find('input[type=checkbox]:checked');
+
+        if (chkCheckeds.length) {
+            if (!confirm('are you sure that you want to delete those teams?')) {
+                return;
+            }
+        }
+
+        var arr = '';
+        chkCheckeds.each(function () {
+            let id = $(this).val();
+            arr = arr + id + '-';
+        });
+
+        if (arr != '') {
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/Home/DeleteTeam',
+                data:
+                {
+                    data: method(arr)
+                },
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result == "successfull") {
+                        datatable.reload();
+                    }
+                    else {
+                        alert(result);
+                    }
+                },
+                error: function (err) {
+
+                }
+            })
+        }
+    }
+
+    function setRowClickEvent() {
+        datatable.on('click', 'td', function () {
+            if ($(this).find('input[type=checkbox]').length ||
+                $(this).find('.kt-datatable__toggle-detail').length) {
+                return;
+            }
+
+            var id = $(this).parent().find('input[type=checkbox]').val();
+            if (id) {
+                //session.setData('Id_acc', id);
+                location.href = "/Common/DetailLeague/?id=" + id;
+            }
+        });
+    }
+</script>

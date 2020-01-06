@@ -16,6 +16,8 @@ namespace FootballCompetition.Controllers.Account
         public IAccountService AccountService { get; set; }
         public ActionResult Login()
         {
+            var model = new LoginModel();
+            
             return View();
         }
         [HttpPost]
@@ -24,5 +26,11 @@ namespace FootballCompetition.Controllers.Account
             var res = AccountService.AcceptLogin(model);
             return RedirectToAction("Login");
         }
+        public ActionResult ABC()
+        {
+           
+            return View();
+        }
+
     }
 }

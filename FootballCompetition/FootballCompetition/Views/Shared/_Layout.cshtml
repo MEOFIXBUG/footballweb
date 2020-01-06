@@ -1,51 +1,21 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!--begin::Fonts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-    <script>
-        WebFont.load({
-            google: {
-                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
-            },
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
-    <!--end::Fonts -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/css/perfect-scrollbar.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/css/bootstrap-select.min.css" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="/assets/css/metronic-style.bundle.min.css" />
     <link rel="stylesheet" href="/assets/css/flaticon.css" />
     <link rel="stylesheet" href="/assets/css/flaticon2.css" />
     <link rel="stylesheet" href="/assets/css/app.css" />
 
     @*<title>Trang chủ</title>*@
-    <title>@ViewBag.Title</title>
+    @*<title>@ViewBag.Title</title>*@
 </head>
 
 <!-- begin::Body -->
@@ -91,20 +61,20 @@
                 <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
                     <div id="kt_aside_menu" class="kt-aside-menu kt-aside-menu--dropdown " data-ktmenu-vertical="1"
                          data-ktmenu-dropdown="1" data-ktmenu-scroll="0">
-                        <ul class="kt-menu__nav ">
-                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here"
+                        <ul class="kt-menu__nav " id="clickActive">
+                            <li id="tabHome" class="kt-menu__item kt-menu__item--submenu kt-menu__item--submenu-fullheight kt-menu__item--open kt-menu__item--here sang-active"
                                 aria-haspopup="true" data-ktmenu-submenu-toggle="click"
                                 data-ktmenu-dropdown-toggle-class="kt-aside-menu-overlay--on">
-                                <a href="/Home/Home" class="kt-menu__link">
+                                <a href="/Home/Home" class="kt-menu__link" data-toggle="tooltip" title="Home">
                                     <i class="fas fa-home"></i>
-                                    <span class="kt-menu__link-text">Trang Chủ</span>
+                                    <span class="kt-menu__link-text">Home</span>
                                 </a>
                             </li>
-                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                            <li id="tabAccount" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
                                 data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
-                                <a class="kt-menu__link kt-menu__toggle">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="Quan Li Tai Khoan">
                                     <i class="fas fa-user"></i>
-                                    <span class="kt-menu__link-text">Quản lý tài khoản</span>
+                                    <span class="kt-menu__link-text">Quan Li Tai Khoan</span>
                                 </a>
                                 <div class="kt-menu__submenu ">
                                     <span class="kt-menu__arrow"></span>
@@ -112,17 +82,17 @@
                                         <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
                                             aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <span class="kt-menu__link">
-                                                <span class="kt-menu__link-text">Quản lý tài khoản</span>
+                                                <span class="kt-menu__link-text">Quan Li Tai Khoan</span>
                                             </span>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <a href="/Account/AddAccount" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Tài Khoản</span>
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Them Tai Khoan</span>
                                             </a>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <a href="/Account/AccountList" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Tài Khoản</span>
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">AccountList</span>
                                             </a>
                                         </li>
                                         @*<li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true"
@@ -184,11 +154,11 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                            <li id="tabRoute" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
                                 data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
-                                <a class="kt-menu__link kt-menu__toggle">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="RouteManagement">
                                     <i class="fas fa-route"></i>
-                                    <span class="kt-menu__link-text">Quản lý tuyến đường</span>
+                                    <span class="kt-menu__link-text">RouteManagement</span>
                                 </a>
                                 <div class="kt-menu__submenu ">
                                     <span class="kt-menu__arrow"></span>
@@ -197,32 +167,32 @@
                                         <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
                                             aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <span class="kt-menu__link">
-                                                <span class="kt-menu__link-text">Quản lý tuyến đường</span>
+                                                <span class="kt-menu__link-text">RouteManagement</span>
                                             </span>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <a href="/Route/AddRoute" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Tuyến Đường</span>
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">AddRoute</span>
                                             </a>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
-                                            <a href="/Account/AccountList" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Tuyến Đường</span>
+                                            <a href="/Route/ListRoute" class="kt-menu__link">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">ListOfRoutes</span>
                                             </a>
                                         </li>
-                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
-                                            <a href="/Account/AddAccount" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import from Excel</span>
-                                            </a>
-                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Account/AddAccount" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import from Excel</span>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom" aria-haspopup="true"
+                            <li id="tabBus" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
                                 data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
-                                <a class="kt-menu__link kt-menu__toggle">
-                                    <i class="fas fa-bus"></i>
-                                    <span class="kt-menu__link-text">Quản lý Nhà Xe</span>
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="BusManagement">
+                                    <i class="fas fa-dharmachakra"></i>
+                                    <span class="kt-menu__link-text">BusManagement</span>
                                 </a>
                                 <div class="kt-menu__submenu ">
                                     <span class="kt-menu__arrow"></span>
@@ -231,24 +201,189 @@
                                         <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
                                             aria-haspopup="true" data-ktmenu-link-redirect="1">
                                             <span class="kt-menu__link">
-                                                <span class="kt-menu__link-text">Quản lý Nhà Xe</span>
+                                                <span class="kt-menu__link-text">BusManagement</span>
+                                            </span>
+                                        </li>
+
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Bus/AddBus" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">AddNewBus</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Bus/BusList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">BusList</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Bus/AddFileExcel" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import From Excel</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Bus/EditBus" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sửa mới xe</span>
+                                                </a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="tabDriver" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="DriverManagement">
+                                    <i class="far fa-address-card"></i>
+                                    <span class="kt-menu__link-text">DriverManagement</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">DriverManagement</span>
                                             </span>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
-                                            <a href="/Account/AddAccount" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Nhà Xe</span>
+                                            <a href="/Driver/AddDriver" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">AddDriver</span>
                                             </a>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
-                                            <a href="/Account/AccountList" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Danh Sách Nhà Xe</span>
+                                            <a href="/Driver/DriversList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">ListDriver</span>
                                             </a>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/AddFileExcel" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import From Excel</span>
+                                                </a>
+                                            </li>*@
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/EditDriver" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sửa Thông Tin Tài Xế</span>
+                                                </a>
+                                            </li>*@
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="tabSchedule" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="ScheduleManagement">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="kt-menu__link-text">ScheduleManagement</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">ScheduleManagement</span>
+                                            </span>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Schedule/AddSchedule" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Thêm Lịch Trình</span>
+                                                </a>
+                                            </li>*@
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Schedule/ListAllSchedule" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">ScheduleList</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/AddFileExcel" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import From Excel</span>
+                                                </a>
+                                            </li>*@
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/EditDriver" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sửa Thông Tin Tài Xế</span>
+                                                </a>
+                                            </li>*@
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="tabTicket" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="TicketManagement">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span class="kt-menu__link-text">TicketManagement</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">TicketManagement</span>
+                                            </span>
                                         </li>
                                         <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
-                                            <a href="/Account/AddAccount" class="kt-menu__link ">
-                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import from Excel</span>
+                                            <a href="/Ticket/TicketList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">SoldTicketsManagement</span>
                                             </a>
                                         </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Ticket/TicketList" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Quản lý vé</span>
+                                                </a>
+                                            </li>*@
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Ticket/SearchTicket" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">LookUpTickets</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/AddFileExcel" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import From Excel</span>
+                                                </a>
+                                            </li>*@
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Driver/EditDriver" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sửa Thông Tin Tài Xế</span>
+                                                </a>
+                                            </li>*@
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="tabTemplate" class="kt-menu__item kt-menu__item--submenu kt-menu__item--bottom sang-active" aria-haspopup="true"
+                                data-ktmenu-submenu-toggle="click" data-ktmenu-link-redirect="1">
+                                <a class="kt-menu__link kt-menu__toggle" data-toggle="tooltip" title="TemplateManagement">
+                                    <i class="fas fa-file-excel"></i>
+                                    <span class="kt-menu__link-text">TemplateManagement</span>
+                                </a>
+                                <div class="kt-menu__submenu ">
+                                    <span class="kt-menu__arrow"></span>
+                                    <ul class="kt-menu__subnav">
+
+                                        <li class="kt-menu__item kt-menu__item--parent kt-menu__item--bottom"
+                                            aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <span class="kt-menu__link">
+                                                <span class="kt-menu__link-text">TemplateManagement</span>
+                                            </span>
+                                        </li>
+                                        <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                            <a href="/Template/TemplatesList" class="kt-menu__link ">
+                                                <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">TemplateList</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Bus/AddFileExcel" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Import From Excel</span>
+                                                </a>
+                                            </li>
+                                            <li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1">
+                                                <a href="/Bus/EditBus" class="kt-menu__link ">
+                                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Sửa mới xe</span>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </div>
                             </li>
@@ -285,6 +420,38 @@
                     <!-- end: Header Menu -->
                     <!-- begin:: Header Topbar -->
                     <div class="kt-header__topbar">
+                        <!--begin: Language bar -->
+                        <div class="kt-header__topbar-item kt-header__topbar-item--langs">
+                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
+                                <span class="kt-header__topbar-icon">
+                                    <img id="img_selected_lang" class="" src="~/assets/images/vi.png" alt="">
+                                </span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(1356px, 64px, 0px);">
+                                <ul class="kt-nav kt-margin-t-10 kt-margin-b-10 lang-dropdown">
+                                    <li class="kt-nav__item kt-nav__item--active">
+                                        <a id="lang_EN" href="#" class="kt-nav__link">
+                                            <span class="kt-nav__link-icon"><img src="~/assets/images/en.png" alt=""></span>
+                                            <span class="kt-nav__link-text">English</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a id="lang_VI" href="#" class="kt-nav__link">
+                                            <span class="kt-nav__link-icon"><img src="~/assets/images/vi.png" alt=""></span>
+                                            <span class="kt-nav__link-text">Việt Nam</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="kt-header__topbar-item kt-header__topbar-item--213">
+                            <div class="kt-header__topbar-wrapper">
+                                <span class="kt-header__topbar-icon" style="height:auto;width:auto">
+                                </span>
+                            </div>
+
+                        </div>
+                        <!--end: Language bar -->
                         <!--begin: User bar -->
                         <div class="kt-header__topbar-item kt-header__topbar-item--user">
                             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
@@ -297,16 +464,17 @@
                                     <div class="kt-user-card__avatar">
                                         <img alt="Pic" src="/assets/images/user.png" />
                                     </div>
+
                                     <div class="kt-user-card__name">
                                         Admin
                                     </div>
                                     <div class="kt-user-card__badge">
-                                        <a href="/Account/UserProfile">
-                                            <button class="btn btn-primary">
-                                                Hồ sơ cá nhân
-                                            </button>
+                                        <a class="btn btn-primary" href="/Account/UserProfile">
+                                            Profile
                                         </a>
+
                                     </div>
+
                                 </div>
 
                                 <!--end: Head -->
@@ -318,14 +486,13 @@
                                         </div>
                                     </div>*@
                                 <div class="kt-notification">
-                                    <div class="kt-notification__custom kt-space-between">
+                                    <div class="kt-notification__custom kt-space-between ">
                                         <a class="btn btn-label btn-label-brand btn-sm btn-bold"
                                            href="@Url.Action("LogOut", "Account")">Đăng xuất</a>
-                                        <form id="logout-form" action="/client" method="POST" style="display: none;">
-                                            @*@csrf*@
 
-                                        </form>
+
                                     </div>
+
                                 </div>
                                 <!--end: Navigation -->
                             </div>
@@ -337,7 +504,8 @@
                     <!-- end:: Header Topbar -->
                 </div>
                 <!-- end:: Header -->
-                @RenderBody();
+
+                @RenderBody()
 
                 <!-- begin:: Footer -->
                 <div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop" id="kt_footer">
@@ -348,9 +516,9 @@
                         </div>
                         <div class="kt-footer__menu">
                             <a href="https://www.bittosolution.vn/ve-chung-toi/" target="_blank"
-                               class="kt-footer__menu-link kt-link">Về chúng tôi</a>
+                               class="kt-footer__menu-link kt-link">About</a>
                             <a href="https://www.bittosolution.vn/lien-he/" target="_blank"
-                               class="kt-footer__menu-link kt-link">Liên hệ khi xảy ra sự cố</a>
+                               class="kt-footer__menu-link kt-link">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -368,42 +536,55 @@
 
     <!-- end::Scrolltop -->
     <!-- begin::Global Config(global config for global JS sciprts) -->
+       
     <script>
-        var KTAppOptions = {
-            "colors": {
-                "state": {
-                    "brand": "#22b9ff",
-                    "light": "#ffffff",
-                    "dark": "#282a3c",
-                    "primary": "#5867dd",
-                    "success": "#34bfa3",
-                    "info": "#36a3f7",
-                    "warning": "#ffb822",
-                    "danger": "#fd3995"
-                },
-                "base": {
-                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
-                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
-                }
-            }
-        };
+        $(document).ready(function () {
+            $('ul li a').click(function () {
+                $('#clickActive ul li a').click(function () {
+                    $('ul li').removeClass('kt-menu__item--open kt-menu__item--here');
+                    $(this).addClass('kt-menu__item--bottom');
+                    $(this).parent().removeClass("kt-menu__item--bottom");
+                    $(this).parent().addClass('actkt-menu__item--open kt-menu__item--here');
+                });
+            });
+
+            //var header = document.getElementById("clickAtive");
+            //var btns = header.getElementsByClassName("sang-active");
+            //for (var i = 0; i < btns.length; i++) {
+            //    btns[i].addEventListener("click", function () {
+            //        var current = document.getElementsByClassName("kt-menu__item--open kt-menu__item--here");
+            //        current[0].className = current[0].className.replace(" kt-menu__item--open kt-menu__item--here", "");
+            //        this.className += " kt-menu__item--open kt-menu__item--here";
+            //    });
+            //}
+            var idTab = '#' + '@Html.Raw(ViewBag.IsActiveIcon)';
+            //alert(idTab);
+            $('#tabHome').removeClass('kt-menu__item--open kt-menu__item--here');
+            $(idTab).addClass('kt-menu__item--open kt-menu__item--here');
+              @*if ('@Html.Raw(ViewBag.IsActiveIcon)')
+                {
+                  $('#activeHome').removeClass('kt-menu__item--open kt-menu__item--here');
+                  $(this).parent().parent().parent().parent().addClass('kt-menu__item--open kt-menu__item--here');
+                }*@
+            //var path = window.location.pathname;
+            //path = path.replace(/\/$/, "");
+            //path = decodeURIComponent(path);
+            //path = path.slice(0, path.indexOf('/', 2));
+            ////alert(path);
+            //if (path != '/Home/Home') {
+            //    $('.kt-menu__subnav a').each(function () {
+            //        var href = $(this).attr('href');
+            //        href = href.slice(0, href.indexOf('/', 2));
+            //        if (path=== href) {
+            //            //alert(href);
+            //            $('#activeHome').removeClass('kt-menu__item--open kt-menu__item--here');
+            //            $(this).parent().parent().parent().parent().addClass('kt-menu__item--open kt-menu__item--here');
+
+            //        }
+            //    });
+            //}
+        })
     </script>
-
-    <!-- end::Global Config -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tooltip.js/1.3.2/umd/tooltip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.2.0/sticky.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.10/js/bootstrap-select.min.js"></script>
-
-    <script src="/assets/js/metronic-scripts.bundle.min.js"></script>
-    <script src="/assets/js/storage.js"></script>
-    <script src="/assets/js/app.js"></script>
 </body>
 
 <!-- end::Body -->

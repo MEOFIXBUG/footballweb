@@ -8,12 +8,12 @@ namespace FB.Account.Repository
 {
     public class AccountRepository : IAccountRepository
     {
-        public AccountModel AcceptLogin(LoginModel model)
+        public LoginModel AcceptLogin(LoginModel model)
         {
             var param = new DynamicParameters();
             param.Add("userName", model.userName);
             param.Add("passWord", model.passWord);
-            return DALHelpers.QueryByStored<AccountModel>("sp_AcceptLogin", param).FirstOrDefault();
+            return DALHelpers.QueryByStored<LoginModel>("sp_AcceptLogin", param).FirstOrDefault();
         }
     }
 }
