@@ -1,0 +1,7 @@
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\System.Collections.Immutable.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\System.Reflection.Metadata.dll
+D:\CNPM\FootballCompetition\FootballCompetition\bin\roslyn\VBCSCompiler.exe

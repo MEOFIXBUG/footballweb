@@ -61,12 +61,11 @@ namespace FB.League.Repository
             //param.Add("@ID", league.l_ID);
             param.Add("@teamName", team.t_NAME);
             param.Add("@teamType", team.t_type);
-            param.Add("@cityName", team.t_cityName);
-            param.Add("@countryName", team.t_countryName);
+            param.Add("@city", team.t_city);
+            param.Add("@country", team.t_country);
             param.Add("@offical_color", team.t_offical_color);
             param.Add("@second_color", team.t_second_color);
             param.Add("@leagueID", team.t_leagueID);
-          
             return DALHelpers.QueryByStored<int>("InsertTeam", param).FirstOrDefault();
         }
 
@@ -80,6 +79,63 @@ namespace FB.League.Repository
             param.Add("@fb_jersey_no2", fb.fb_jersey_no2);
             param.Add("@fb_teamID", fb.fb_teamID);
             return DALHelpers.ExecuteByStored("usp_FBler_Insertfbler", param) > 0;
+        }
+        public int CreateOneRound(Round round)
+        {
+            var param = new DynamicParameters();
+            //param.Add("@ID", league.l_AOR);
+            //param.Add("@ID", league.l_ID);
+            param.Add("@RoundName", round.r_name);
+            param.Add("@RoundstartAt", round.r_start);
+            param.Add("@RoundendAt", round.r_end);
+            param.Add("@leagueID", round.r_league);
+            return DALHelpers.QueryByStored<int>("usp_Round_CreateOne", param).FirstOrDefault();
+        }
+        public IEnumerable<Team> GetAllTeamByID(int leagueID)
+        {
+            var param = new DynamicParameters();
+            param.Add("@ID", leagueID);
+            return DALHelpers.QueryByStored<Team>("usp_Team_GetByLeagueID", param);
+        }
+        public int CreateOneCity(string ciyName)
+        {
+            var param = new DynamicParameters();
+            //param.Add("@ID", league.l_AOR);
+            //param.Add("@ID", league.l_ID);
+            param.Add("@cityName", ciyName);
+           
+            return DALHelpers.QueryByStored<int>("usp_City_CreateOne", param).FirstOrDefault();
+        }
+        public int CreateOneCountry(string countryName)
+        {
+            var param = new DynamicParameters();
+            //param.Add("@ID", league.l_AOR);
+            //param.Add("@ID", league.l_ID);
+            param.Add("@countryName", countryName);
+
+            return DALHelpers.QueryByStored<int>("usp_Country_CreateOne", param).FirstOrDefault();
+        }
+        public int CreateOneStadium(Stadium stadium)
+        {
+            var param = new DynamicParameters();
+            //param.Add("*@ID", league.l_AOR);
+            //param.Add("@ID", league.l_ID);
+            param.Add("@s_name", stadium.s_name);
+            param.Add("@s_city", stadium.s_city);
+            param.Add("@s_country", stadium.s_country);
+            return DALHelpers.QueryByStored<int>("usp_Stadium_CreateOne", param).FirstOrDefault();
+        }
+
+        public bool InsertVS(Vs vs)
+        {
+            var param = new DynamicParameters();
+            param.Add("@vs_round", vs.vs_round);
+            param.Add("@vs_league", vs.vs_league);
+            param.Add("@vs_home", vs.vs_home.t_ID);
+            param.Add("@vs_guess", vs.vs_guess.t_ID);
+            param.Add("@vs_date", vs.vs_date);
+            param.Add("@vs_stadium", vs.vs_stadium);
+            return DALHelpers.ExecuteByStored("usp_Vs_CreateOne", param) > 0;
         }
     }
 }

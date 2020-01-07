@@ -32,6 +32,15 @@ namespace FB.League.Domain.Model
         public string vs_result { get; set; }
         public int vs_goalTotal { get; set; }
         public int vs_goalDiff { get; set; }
+        public int vs_league { get; set; }
+        public DateTime vs_date { get; set; }
+    }
+    public class Stadium
+    {
+        public int s_ID { get; set; }
+        public string s_name { get; set; }
+        public int s_city { get; set; }
+        public int s_country { get; set; }
     }
     public class Round
     {
@@ -67,6 +76,8 @@ namespace FB.League.Domain.Model
         public IEnumerable<Footballer> footballers { get; set; }
         public string t_template { get; set; }
         public int t_leagueID { get; set; }
+        public int t_stadium { get; set; }
+        public string t_stadiumName { get; set; }
     }
     public class LeagueX
     {

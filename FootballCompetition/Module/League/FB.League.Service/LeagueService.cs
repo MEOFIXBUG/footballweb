@@ -84,5 +84,75 @@ namespace FB.League.Service
                 return false;
             }
         }
+        public int CreateOneRound(Round round)
+        {
+            try
+            {
+                return LeagueRepository.CreateOneRound(round);
+            }
+            catch (Exception ex)
+            {
+
+                return -1;
+            }
+        }
+        public IEnumerable<Team> GetAllTeamByID(int leagueID)
+        {
+            try
+            {
+                return LeagueRepository.GetAllTeamByID(leagueID);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public int CreateOneCity(string cityName)
+        {
+            try
+            {
+                return LeagueRepository.CreateOneCity(cityName);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        public int CreateOneCountry(string countryName)
+        {
+            try
+            {
+                return LeagueRepository.CreateOneCountry(countryName);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        public int CreateOneStadium(Stadium stadium)
+        {
+            try
+            {
+                return LeagueRepository.CreateOneStadium(stadium);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+        public bool InsertVS(Vs vs)
+        {
+            try
+            {
+                return LeagueRepository.InsertVS(vs);
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
     }
 }

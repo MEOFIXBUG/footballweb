@@ -278,17 +278,46 @@
     }
 
     function setRowClickEvent() {
-        datatable.on('click', 'td', function () {
-            if ($(this).find('input[type=checkbox]').length ||
-                $(this).find('.kt-datatable__toggle-detail').length) {
-                return;
-            }
+        //datatable.on('click', 'td', function () {
+        //    if ($(this).find('input[type=checkbox]').length ||
+        //        $(this).find('.kt-datatable__toggle-detail').length) {
+        //        return;
+        //    }
 
-            var id = $(this).parent().find('input[type=checkbox]').val();
-            if (id) {
-                //session.setData('Id_acc', id);
-                location.href = "/Common/DetailLeague/?id=" + id;
-            }
-        });
+        //    var id = $(this).parent().find('input[type=checkbox]').val();
+        //    if (id) {
+        //        //session.setData('Id_acc', id);
+        //        location.href = "/Common/DetailLeague/?id=" + id;
+        //    }
+        //});
+    }
+
+    function Generate() {
+         $.ajax({
+                type: 'POST',
+                url: '/Admin/Home/Generate',
+                data:
+                {
+                    leagueID: id
+                },
+                dataType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.Result == "successfull") {
+                        datatable.reload();
+                    }
+                    else {
+                        if (result.Result == "failure") {
+                            alert(result.Mess);
+                        }
+                        else {
+                            alert(result.Result);
+                        }
+                    }
+                },
+                error: function (err) {
+
+                }
+            })
     }
 </script>

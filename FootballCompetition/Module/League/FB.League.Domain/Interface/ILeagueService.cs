@@ -17,6 +17,14 @@ namespace FB.League.Domain.Interface
         int InsertTeam(Team team);
         IEnumerable<Team> GetAllTeam(DatatableReq obj);
         bool InsertFootballer(Footballer fb);
+        int CreateOneRound(Round round);
+        IEnumerable<Team> GetAllTeamByID(int leagueID);
+        int CreateOneCity(string ciyName);
+
+        int CreateOneCountry(string countryName);
+
+        int CreateOneStadium(Stadium stadium);
+        bool InsertVS(Vs vs);
 
     }
 }
