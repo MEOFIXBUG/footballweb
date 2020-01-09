@@ -76,7 +76,112 @@ namespace FootballCompetition.Controllers.Common
                 foreach (var team in teams)
                 {
                     datatableReq.total = team.Total;
+                    team.t_matches = team.t_playedMatch;
+                    //team.t_Point =3*team.t_won + team.t_draw;
+                    team.t_Diff = team.t_goal - team.t_goalLost;
                     data.Add(JObject.FromObject(team));
+                }
+            }
+
+            dynamic meta = new JObject();
+            meta["page"] = datatableReq.page;
+            meta["pages"] = datatableReq.total / datatableReq.perpage;
+            meta["perpage"] = datatableReq.perpage;
+            meta["total"] = datatableReq.total;
+            meta["sort"] = datatableReq.sort;
+            meta["field"] = datatableReq.cField;
+
+            result["meta"] = meta;
+            result["data"] = data;
+
+            return Content(JsonConvert.SerializeObject(result), "application/json");
+        }
+        public ActionResult GetAllRound(int leagueID)
+        {
+            DatatableReq datatableReq = GetDatatableReq(Request);
+            datatableReq.Id = leagueID;
+            IEnumerable<Round> rounds = LeagueService.GetAllRound(datatableReq);
+
+            dynamic result = new JObject();
+
+            dynamic data = new JArray();
+            if (rounds != null)
+            {
+                foreach (var round in rounds)
+                {
+                    datatableReq.total = round.Total;
+                    //team.t_matches = team.t_won + team.t_lost + team.t_draw;
+                    //team.t_Point = 3 * team.t_won + team.t_draw;
+                    //team.t_Diff = team.t_goal - team.t_goalLost;
+                    data.Add(JObject.FromObject(round));
+                }
+            }
+
+            dynamic meta = new JObject();
+            meta["page"] = datatableReq.page;
+            meta["pages"] = datatableReq.total / datatableReq.perpage;
+            meta["perpage"] = datatableReq.perpage;
+            meta["total"] = datatableReq.total;
+            meta["sort"] = datatableReq.sort;
+            meta["field"] = datatableReq.cField;
+
+            result["meta"] = meta;
+            result["data"] = data;
+
+            return Content(JsonConvert.SerializeObject(result), "application/json");
+        }
+        public ActionResult GetAllVs(int leagueID)
+        {
+            DatatableReq datatableReq = GetDatatableReq(Request);
+            datatableReq.Id = leagueID;
+            IEnumerable<Vs> vs_es = LeagueService.GetAllVs(datatableReq);
+
+            dynamic result = new JObject();
+
+            dynamic data = new JArray();
+            if (vs_es != null)
+            {
+                foreach (var vs in vs_es)
+                {
+                    datatableReq.total = vs.Total;
+                    //team.t_matches = team.t_won + team.t_lost + team.t_draw;
+                    //team.t_Point = 3 * team.t_won + team.t_draw;
+                    //team.t_Diff = team.t_goal - team.t_goalLost;
+                    data.Add(JObject.FromObject(vs));
+                }
+            }
+
+            dynamic meta = new JObject();
+            meta["page"] = datatableReq.page;
+            meta["pages"] = datatableReq.total / datatableReq.perpage;
+            meta["perpage"] = datatableReq.perpage;
+            meta["total"] = datatableReq.total;
+            meta["sort"] = datatableReq.sort;
+            meta["field"] = datatableReq.cField;
+
+            result["meta"] = meta;
+            result["data"] = data;
+
+            return Content(JsonConvert.SerializeObject(result), "application/json");
+        }
+        public ActionResult GetVsOfRound(int RoundID)
+        {
+            DatatableReq datatableReq = GetDatatableReq(Request);
+            datatableReq.Id = RoundID;
+            IEnumerable<Vs> vs_es = LeagueService.GetVsOfRound(datatableReq);
+
+            dynamic result = new JObject();
+
+            dynamic data = new JArray();
+            if (vs_es != null)
+            {
+                foreach (var vs in vs_es)
+                {
+                    datatableReq.total = vs.Total;
+                    //team.t_matches = team.t_won + team.t_lost + team.t_draw;
+                    //team.t_Point = 3 * team.t_won + team.t_draw;
+                    //team.t_Diff = team.t_goal - team.t_goalLost;
+                    data.Add(JObject.FromObject(vs));
                 }
             }
 

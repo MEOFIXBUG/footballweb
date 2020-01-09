@@ -20,12 +20,18 @@ namespace FB.League.Domain.Model
     }
     public class Vs
     {
+        public string vs_stadiumName { get; set; }
+        public int Total { get; set; }
         public int vs_ID { get; set; }
         public int vs_round { get; set; }
         //public int vs_home { get; set; }
-        public Team vs_home { get; set; }
+        public int vs_home { get; set; }
+        public string vs_homeName { get; set; }
+        public Team vs_homeX { get; set; }
         //public int vs_guess { get; set; }
-        public Team vs_guess { get; set; }
+        public int vs_guess { get; set; }
+        public string vs_guessName { get; set; }
+        public Team vs_guessX { get; set; }
         public int vs_stadium { get; set; }
         public string vs_decidedBy { get; set; }
         public int vs_referee { get; set; }
@@ -34,6 +40,8 @@ namespace FB.League.Domain.Model
         public int vs_goalDiff { get; set; }
         public int vs_league { get; set; }
         public DateTime vs_date { get; set; }
+        public int vs_homeScore { get; set; }
+        public int vs_guessScore { get; set; }
     }
     public class Stadium
     {
@@ -44,6 +52,7 @@ namespace FB.League.Domain.Model
     }
     public class Round
     {
+        public int Total { get; set; }
         public int r_ID { get; set; }
         public string r_name { get; set; }
         public DateTime r_start { get; set; }
@@ -78,6 +87,10 @@ namespace FB.League.Domain.Model
         public int t_leagueID { get; set; }
         public int t_stadium { get; set; }
         public string t_stadiumName { get; set; }
+        public int t_goalLost { get; set; }
+        public int t_matches { get; set; }
+        public int t_Diff { get; set; }
+        public int t_Point { get; set; }
     }
     public class LeagueX
     {
@@ -96,5 +109,6 @@ namespace FB.League.Domain.Model
         public int l_max { get; set; }
         public int l_min { get; set; }
         public int l_over { get; set; }
+         public int l_Oage { get; set; }
     }
 }

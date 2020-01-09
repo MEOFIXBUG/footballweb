@@ -5,98 +5,325 @@
 }
 
 @model FB.League.Domain.Model.LeagueX
-    <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-        <div class="kt-subheader kt-grid__item" id="kt_subheader">
-            <div class="kt-container kt-container--fluid ">
-                <div class="kt-subheader__main">
-                </div>
+<div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div class="kt-container kt-container--fluid ">
+            <div class="kt-subheader__main">
             </div>
         </div>
-        @using (Html.BeginForm("AddLeague", "Home", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.HiddenFor(m => m.l_ID);
-            <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
-                <div class="kt-portlet kt-portlet--mobile">
-                    <div class="kt-portlet__head">
-                        <div class="kt-portlet__head-label">
-                            <h3>Add/Update</h3>
+    </div>
+    @using (Html.BeginForm("AddLeague", "Home", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.l_ID);
+        <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3>Add/Update</h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row">
+                        <div class="col-xl-12 row">
+                            <div class="col-xl-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="far fa-save"></i> Save
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="kt-portlet__body">
-                        <div class="row">
-                            <div class="col-xl-12 row">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
                                 <div class="col-xl-3">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="far fa-save"></i> Save
+                                    <label class="col-form-label">League Name</label>
+                                    @Html.TextBoxFor(m => m.l_name, new { @class = "form-control", @placeholder = "", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_name, "", new { @style = "color:red", @class = "msgNumberPlate rexMess" })
+                                </div>
+                                <div class="col-xl-3">
+                                    <label class="col-form-label">StartAt</label>
+                                    @Html.TextBoxFor(m => m.l_start, "{0:yyyy-MM-dd}", new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_start, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                </div>
+                                <div class="col-xl-3">
+                                    <label class="col-form-label">EndAt</label>
+                                    @Html.TextBoxFor(m => m.l_end, "{0:yyyy-MM-dd}", new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_end, "", new { @style = "color:red", @class = "msgByname rexMess" })
+                                </div>
+                                <div class="col-xl-3">
+                                    <label class="col-form-label">Number of Teams </label>
+                                    @Html.TextBoxFor(m => m.l_teamNumber, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_teamNumber, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-3">
+                                    <label class="col-form-label">Age</label>
+                                    @Html.TextBoxFor(m => m.l_AOR, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_AOR, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                    <label class="col-form-label">Over Age</label>
+                                    @Html.TextBoxFor(m => m.l_Oage, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_Oage, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+
+                                </div>
+                                <div class="col-xl-3">
+                                    <label class="col-form-label">For</label>
+                                    @Html.DropDownListFor(m => m.l_for, new List<SelectListItem> {
+                                        new SelectListItem {Value = "1",Text="country"},
+                                        new SelectListItem {Value = "2",Text="club"}
+                                        }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.l_for, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                    <label class="col-form-label">Over</label>
+                                    @Html.TextBoxFor(m => m.l_over, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.l_over, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
+                                </div>
+                                <div class="col-xl-6">
+                                    <label class="col-form-label">Description</label>
+                                    @Html.TextAreaFor(m => m.l_descript, new { @class = "form-control", @placeholder = "", @style = "height:150px;" })
+                                    @Html.ValidationMessageFor(m => m.l_descript, "", new { @style = "color:red", @class = "msgAmountFloor rexMess" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-2">
+                                    @*<label class="col-form-label">Team List</label>*@
+                                    @*<input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" class="form-control" multiple>
+                                        <div class="col-form-label" id="selectedFiles"></div>*@
+                                    <button id="btnUpdate" type="button" class="btn btn-primary" disabled="disabled" onclick="updateTeam()">
+                                        <i class="far fa-folder"></i> Update Team List
+                                    </button>
+                                </div>
+                                <div class="col-xl-2">
+                                    @*<label class="col-form-label">Team List</label>*@
+                                    @*<input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" class="form-control" multiple>
+                                        <div class="col-form-label" id="selectedFiles"></div>*@
+                                    <button id="btnSchedule" type="button" class="btn btn-primary" disabled="disabled" onclick="Schedule()">
+                                        <i class="far fa-calendar-alt"></i> Schedule
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="row">
-                                    <div class="col-xl-3">
-                                        <label class="col-form-label">League Name</label>
-                                        @Html.TextBoxFor(m => m.l_name, new { @class = "form-control", @placeholder = "", @required = "required" })
-                                        @Html.ValidationMessageFor(m => m.l_name, "", new { @style = "color:red", @class = "msgNumberPlate rexMess" })
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <label class="col-form-label">StartAt</label>
-                                        @Html.TextBoxFor(m => m.l_start, new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
-                                        @Html.ValidationMessageFor(m => m.l_start, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <label class="col-form-label">EndAt</label>
-                                        @Html.TextBoxFor(m => m.l_end, new { @class = "form-control", @placeholder = "", @type = "date", @required = "required" })
-                                        @Html.ValidationMessageFor(m => m.l_end, "", new { @style = "color:red", @class = "msgByname rexMess" })
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="row">
-                                    <div class="col-xl-3">
-                                        <label class="col-form-label">Number of Teams </label>
-                                        @Html.TextBoxFor(m => m.l_teamNumber, new { @class = "form-control", @placeholder = "", @type = "number", @required = "required" })
-                                        @Html.ValidationMessageFor(m => m.l_teamNumber, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
-                                    </div>
-                                    <div class="col-xl-3">
-                                        <label class="col-form-label">For</label>
-                                        @Html.DropDownListFor(m => m.l_for, new List<SelectListItem> {
-                                            new SelectListItem {Value = "1",Text="country"},
-                                            new SelectListItem {Value = "2",Text="club"}
-                                            }, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.l_for, "", new { @style = "color:red", @class = "msgVehicleRegistrationDate rexMess" })
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label class="col-form-label">Description</label>
-                                        @Html.TextAreaFor(m => m.l_descript, new { @class = "form-control", @placeholder = "", @style = "height:150px;" })
-                                        @Html.ValidationMessageFor(m => m.l_descript, "", new { @style = "color:red", @class = "msgAmountFloor rexMess" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="row">
-                                    <div class="col-xl-6">
-                                        @*<label class="col-form-label">Team List</label>*@
-                                        @*<input id="Fileexcel" type="file" name="fileExcel" accept=".xls,.xlsx" class="form-control" multiple>
-                                        <div class="col-form-label" id="selectedFiles"></div>*@
-                                        <button type="button" class="btn btn-primary">
-                                            <i class="far fa-folder"></i> Update Team List
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        }
+        </div>
+    }
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div class="kt-container kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title"> <b>RANK</b></h3>
+
+                <form class="kt-margin-l-20" id="kt_subheader_search_form">
+                    <div class="kt-input-icon kt-input-icon--right kt-subheader__search">
+                        <input type="text" class="form-control" placeholder="Search..."
+                               id="generalSearch">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                            <span><i class="fas fa-search"></i></span>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            @*<div class="kt-subheader__toolbar">
+                    <button class="btn btn-primary" onclick="Generate();">
+                        Generate
+                    </button>
+                    <button class="btn btn-primary" onclick="Del();">
+                        Delete
+                    </button>
+                </div>*@
+        </div>
     </div>
+
+    <!-- end:: Subheader -->
+    <!-- begin:: Content -->
+    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+        <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-datatable"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Content -->
+</div>
 <script src="~/Scripts/sweetalert.min.js"></script>
+<script>
+    var id;
+    $(document).ready(function () {
+        id = $('#l_ID').val();
+        if (id != 0) {
+            $('#btnUpdate').prop("disabled", false);
+            $('#btnSchedule').prop("disabled", false);
+        }
+
+    })
+    function updateTeam() {
+        window.location.href = "/Admin/Home/TeamListFile?leagueID=" + id;
+    }
+    function Schedule() {
+        window.location.href = "/Admin/Home/Round?leagueID=" + id;
+    }
+
+</script>
+<script>
+
+    var datatable;
+    var dataSet = [];
+    var total;
+    var idLeague = $('#l_ID').val();
+    $(document).ready(function () {
+
+
+        var options = {
+            // datasource definition
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        url: '/Common/GetAllTeam?leagueID=' + idLeague,
+                        method: 'GET',
+                        map: function (raw) {
+                            dataSet = raw;
+                            if (typeof raw.meta !== 'undefined') {
+                                total = raw.meta.total;
+                            }
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            return dataSet;
+                        },
+                    },
+                },
+                pageSize: 10,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+            },
+            // layout definition
+            layout: {
+                scroll: true,
+                height: 600,
+
+                footer: false
+            },
+            // column sorting
+            sortable: true,
+            pagination: true,
+            search: {
+                input: $('#generalSearch'),
+            },
+            // columns definition
+            columns: [
+                {
+                    field: 't_ID',
+                    title: '#',
+                    sortable: false,
+                    width: 20,
+                    type: 'number',
+                    selector: {
+                        class: 'kt-checkbox--solid'
+                    },
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_NAME',
+                    title: 'Team Name',
+                    textAlign: 'center',
+                    template: function (data) {
+                        return '<div class="kt-user-card-v2">' +
+                            '<div class="kt-user-card-v2__pic">' +
+                            '<div class="kt-badge kt-badge--xl bg-main">' +
+
+                            '</div>' +
+                            '</div>' +
+                            '<div class="kt-user-card-v2__details">' +
+                            '<span class="kt-user-card-v2__name">' + data['t_NAME'] + '</span>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                },
+                {
+                    field: 't_matches',
+                    width: 24,
+                    title: 'Matches',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_won',
+                    width: 20,
+                    title: 'Won',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_draw',
+                    width: 24,
+                    title: 'Draw',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_lost',
+                    width: 24,
+                    title: 'Lost',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_goal',
+                    width: 20,
+                    title: 'Goal',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_goalLost',
+                    width: 24,
+                    title: 'GoalLost',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_Diff',
+                    width: 24,
+                    title: 'Diff',
+                    textAlign: 'center',
+                },
+                {
+                    field: 't_Point',
+                    width: 24,
+                    title: 'Point',
+                    textAlign: 'center',
+                }]
+        };
+
+        datatable = $('.kt-datatable').KTDatatable(options);
+        datatable.on('kt-datatable--on-reloaded', function () {
+            setRowClickEvent();
+        });
+
+        datatable.reload();
+    });
+
+    function setRowClickEvent() {
+        //datatable.on('click', 'td', function () {
+        //    if ($(this).find('input[type=checkbox]').length ||
+        //        $(this).find('.kt-datatable__toggle-detail').length) {
+        //        return;
+        //    }
+
+        //    var id = $(this).parent().find('input[type=checkbox]').val();
+        //    if (id) {
+        //        //session.setData('Id_acc', id);
+        //        location.href = "/Common/DetailLeague/?id=" + id;
+        //    }
+        //});
+    }
+
+
+</script>
 
 

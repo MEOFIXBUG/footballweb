@@ -131,7 +131,7 @@
                 class :'abc',
                 textAlign: 'center',
                 template: function (data) {
-                    return moment(data['birthday']).format('YYYY-MM-DD');
+                    return moment(data['l_start']).format('YYYY-MM-DD');
                 }
             }, 
             {
@@ -139,7 +139,7 @@
                 title: 'End At',
                 textAlign: 'center',
                 template: function (data) {
-                    return moment(data['birthday']).format('YYYY-MM-DD');
+                    return moment(data['l_end']).format('YYYY-MM-DD');
                 }
             },
             {
@@ -158,7 +158,7 @@
     });
 
     function New() {
-        location.reload();
+        window.location.href= "/Admin/Home/AddLeague"
     }
 
     function setRowClickEvent() {
@@ -171,7 +171,7 @@
             var id = $(this).parent().find('input[type=checkbox]').val();
             if (id) {
                 //session.setData('Id_acc', id);
-                location.href = "/Common/DetailLeague/?id=" + id;
+                location.href = "/Admin/Home/AddLeague?index=" + id;
             }
         });
     }

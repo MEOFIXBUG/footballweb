@@ -16,19 +16,25 @@ namespace FootballCompetition.Controllers.Account
         public IAccountService AccountService { get; set; }
         public ActionResult Login()
         {
-            var model = new LoginModel();
-            
             return View();
         }
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
             var res = AccountService.AcceptLogin(model);
-            return RedirectToAction("Login");
+            if (res != null)
+            {
+                Session["AdminInfo"] = res;
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+            else
+            {
+                return View();
+            }
         }
-        public ActionResult ABC()
+        public ActionResult Index()
         {
-           
+
             return View();
         }
 

@@ -66,6 +66,7 @@ namespace FB.League.Repository
             param.Add("@offical_color", team.t_offical_color);
             param.Add("@second_color", team.t_second_color);
             param.Add("@leagueID", team.t_leagueID);
+            param.Add("@stadium", team.t_stadium);
             return DALHelpers.QueryByStored<int>("InsertTeam", param).FirstOrDefault();
         }
 
@@ -131,11 +132,67 @@ namespace FB.League.Repository
             var param = new DynamicParameters();
             param.Add("@vs_round", vs.vs_round);
             param.Add("@vs_league", vs.vs_league);
-            param.Add("@vs_home", vs.vs_home.t_ID);
-            param.Add("@vs_guess", vs.vs_guess.t_ID);
+            param.Add("@vs_home", vs.vs_homeX.t_ID);
+            param.Add("@vs_guess", vs.vs_guessX.t_ID);
             param.Add("@vs_date", vs.vs_date);
             param.Add("@vs_stadium", vs.vs_stadium);
             return DALHelpers.ExecuteByStored("usp_Vs_CreateOne", param) > 0;
+        }
+        public IEnumerable<Round> GetAllRound(DatatableReq obj)
+        {
+            var param = new DynamicParameters();
+            param.Add("@LeagueID", obj.Id);
+            param.Add("@SearchTerm", obj.search);
+            param.Add("@SortColumn", obj.cField);
+            param.Add("@SortOrder", obj.sort);
+            param.Add("@PageNumber", obj.page);
+            param.Add("@PageSize", obj.perpage);
+            return DALHelpers.QueryByStored<Round>("usp_Round_GetAll", param);
+        }
+        public IEnumerable<Vs> GetAllVs(DatatableReq obj)
+        {
+            var param = new DynamicParameters();
+            param.Add("@LeagueID", obj.Id);
+            param.Add("@SearchTerm", obj.search);
+            param.Add("@SortColumn", obj.cField);
+            param.Add("@SortOrder", obj.sort);
+            param.Add("@PageNumber", obj.page);
+            param.Add("@PageSize", obj.perpage);
+            var a= DALHelpers.QueryByStored<Vs>("usp_Vs_GetAll", param);
+            return a;
+        }
+        public Team GetOneTeamByID(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add("@ID", id);
+            return DALHelpers.QueryByStored<Team>("usp_Team_GetOneByID", param).FirstOrDefault();
+        }
+        public IEnumerable<Vs> GetVsOfRound(DatatableReq obj)
+        {
+            var param = new DynamicParameters();
+            param.Add("@roundID", obj.Id);
+            param.Add("@SearchTerm", obj.search);
+            param.Add("@SortColumn", obj.cField);
+            param.Add("@SortOrder", obj.sort);
+            param.Add("@PageNumber", obj.page);
+            param.Add("@PageSize", obj.perpage);
+            var a = DALHelpers.QueryByStored<Vs>("usp_Vs_GetAllOfRound", param);
+            return a;
+        }
+        public bool UpdateScored(Vs vs)
+        {
+            var param = new DynamicParameters();
+            param.Add("@vsID", vs.vs_ID);
+            param.Add("@vsGoalTotal", vs.vs_goalTotal);
+            param.Add("@vsGoalDiff", vs.vs_goalDiff);
+            var a = DALHelpers.ExecuteByStored("usp_Vs_updateScored", param)>0;
+            return a;
+        }
+        public Stadium GetOneStadiumByID(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add("@ID", id);
+            return DALHelpers.QueryByStored<Stadium>("usp_Stadium_GetOneByID", param).FirstOrDefault();
         }
     }
 }

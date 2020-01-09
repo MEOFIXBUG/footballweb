@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "AllVs";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div class="kt-container kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">Vs</h3>
+
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+
+                <span class="total-items kt-subheader__desc">Tổng: <span id="total"></span></span>
+
+                <form class="kt-margin-l-20" id="kt_subheader_search_form">
+                    <div class="kt-input-icon kt-input-icon--right kt-subheader__search">
+                        <input type="text" class="form-control" placeholder="Search..."
+                               id="generalSearch">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                            <span><i class="fas fa-search"></i></span>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Subheader -->
+    <!-- begin:: Content -->
+    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+        <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-datatable"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end:: Content -->
+</div>
+<div id="scored" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/Admin/Home/UpdateScored" method="post" id="formHidden">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titile">Update score </h5>
+                    <input id="vs_ID" name="vs_ID" type="number" hidden />
+                    <input id="vs_round" name="vs_round" value="@ViewBag.ID" type="number" hidden />
+
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <table>
+                                <tr><td id="homeTeam"></td><td><input class="inputs" name="vs_homeScore" type="text" /></td><td>-</td><td><input class="inputs" name="vs_guessScore" type="text" /></td><td id="guessTeam"></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-2"></div>
+                            <div class="col-xl-4">
+                                <button type="submit" class="btn btn-primary btn-full-width">
+                                    OK
+                                </button>
+                            </div>
+                            <div class="col-xl-4">
+                                <button data-dismiss="modal" class="btn btn-primary btn-full-width" type="button">
+                                    Cancel
+                                </button>
+                            </div>
+                            <div class="col-xl-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    var datatable;
+    var dataSet = [];
+
+    $(document).ready(function () {
+
+
+        var options = {
+            // datasource definition
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        url: '/Common/GetAllVs?leagueID=@ViewBag.ID',
+                        method: 'GET',
+                        map: function (raw) {
+                            dataSet = raw;
+                            if (typeof raw.meta !== 'undefined') {
+                                $('#total').html(raw.meta.total);
+                            }
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            return dataSet;
+                        },
+                    },
+                },
+                pageSize: 10,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+            },
+            // layout definition
+            layout: {
+                scroll: true,
+                height: 600,
+
+                footer: false
+            },
+            // column sorting
+            sortable: true,
+            pagination: true,
+            search: {
+                input: $('#generalSearch'),
+            },
+            // columns definition
+            columns: [
+            {
+                field: 'vs_ID',
+                title: '#',
+                sortable: false,
+                width: 20,
+                type: 'number',
+                selector: {
+                    class: 'kt-checkbox--solid'
+                },
+                textAlign: 'center',
+            },
+            {
+                field: 'vs_homeName',
+                title: 'Home Name',
+               class :'abc',
+                //sortable: false,
+                textAlign: 'center',
+                template: function (data) {
+                    return '<div class="kt-user-card-v2">' +
+                        '<div class="kt-user-card-v2__pic">' +
+                            '<div class="kt-badge kt-badge--xl bg-main">' +
+
+                            '</div>' +
+                         '</div>' +
+                            '<div class="kt-user-card-v2__details">' +
+                                '<span class="kt-user-card-v2__name">' + data['vs_homeName'] + '</span>' +
+                            '</div>' +
+                        '</div>';
+                }
+            },
+            {
+                field: 'vs_guessName',
+                title: 'Guess Name',
+               class :'abc',
+                //sortable: false,
+                textAlign: 'center',
+                template: function (data) {
+                    return '<div class="kt-user-card-v2">' +
+                        '<div class="kt-user-card-v2__pic">' +
+                            '<div class="kt-badge kt-badge--xl bg-main">' +
+
+                            '</div>' +
+                         '</div>' +
+                            '<div class="kt-user-card-v2__details">' +
+                                '<span class="kt-user-card-v2__name">' + data['vs_guessName'] + '</span>' +
+                            '</div>' +
+                        '</div>';
+                }
+            },
+            {
+                field: 'vs_date',
+                title: 'Start At',
+                class :'abc',
+                textAlign: 'center',
+                template: function (data) {
+                    return moment(data['vs_date']).format('MMMM Do YYYY, h:mm:ss a');
+                }
+            },
+            {
+                field: 'vs_stadiumName',
+                title: 'Stadium',
+                class :'abc',
+                textAlign: 'center',
+            }]
+        };
+
+        datatable = $('.kt-datatable').KTDatatable(options);
+        datatable.on('kt-datatable--on-reloaded', function () {
+            setRowClickEvent();
+        });
+
+        datatable.reload();
+    });
+
+
+    function setRowClickEvent() {
+        datatable.on('click', 'td', function () {
+            if ($(this).find('input[type=checkbox]').length ||
+                $(this).find('.kt-datatable__toggle-detail').length) {
+                return;
+            }
+            var id = $(this).parent().find('input[type=checkbox]').val();
+            var index = -1;
+            for (var i = 0; i < dataSet.length; i++) {
+                if (dataSet[i].vs_ID == id) {
+                    index = i;
+                    break;
+                }
+            }
+            if (id) {
+                //session.setData('Id_acc', id);
+                $('#vs_ID').val(id);
+                $('#homeTeam').html(dataSet[index].vs_homeName);
+                $('#guessTeam').html(dataSet[index].vs_guessName);
+                $('#scored').modal('show');
+
+            }
+        });
+    }
+</script>

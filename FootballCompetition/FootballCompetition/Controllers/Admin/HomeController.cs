@@ -1,4 +1,5 @@
-﻿using FB.League.Domain.Interface;
+﻿using FB.Account.Domain.Model;
+using FB.League.Domain.Interface;
 using FB.League.Domain.Model;
 using Microsoft.Practices.Unity;
 using OfficeOpenXml;
@@ -20,13 +21,22 @@ namespace FootballCompetition.Controllers.Admin
         public ILeagueService LeagueService { get; set; }
         public ActionResult Index()
         {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
             return View();
         }
         [HttpPost]
         public ActionResult AddLeague(LeagueX leage, HttpPostedFileBase[] fileExcel)
         {
             //Ensure model state is valid
-
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
             if (ModelState.IsValid)
             {   //iterating through multiple file collection   
                 foreach (HttpPostedFileBase file in fileExcel)
@@ -56,6 +66,11 @@ namespace FootballCompetition.Controllers.Admin
         }
         public ActionResult TeamListFile(int leagueID)
         {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
             List<string> Name = new List<string>();
             //get team name
             if (TempData.ContainsKey("ERROR"))
@@ -69,6 +84,11 @@ namespace FootballCompetition.Controllers.Admin
         [HttpPost]
         public ActionResult TeamListFile(int leagueID, HttpPostedFileBase[] fileExcel)
         {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
             var infoLeague = LeagueService.GetLeagueByID(leagueID);
             List<string> Name = new List<string>();
             foreach (HttpPostedFileBase file in fileExcel)
@@ -159,6 +179,11 @@ namespace FootballCompetition.Controllers.Admin
         [HttpPost]
         public ActionResult Generate(int leagueID)
         {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
             try
             {
                 var infoLeague = LeagueService.GetLeagueByID(leagueID);
@@ -170,7 +195,7 @@ namespace FootballCompetition.Controllers.Admin
                     int matchesPerRound = infoLeague.l_teamNumber / 2;
                     DateTime RoundstartAt = infoLeague.l_start;
 
-                    int dateStep = (int)(infoLeague.l_end - infoLeague.l_start).TotalDays;
+                    int dateStep = (int)(infoLeague.l_end - infoLeague.l_start).TotalDays / totalRounds - 1;
                     for (int round = 0; round < totalRounds; round++)
                     {
                         var rnd = new Round();
@@ -186,23 +211,27 @@ namespace FootballCompetition.Controllers.Admin
                             //add match
                             int home;
                             int guess;
-                            if (round < halfSeason)
+                            home = (round + match) % (infoLeague.l_teamNumber-1);
+                            guess = (infoLeague.l_teamNumber - 1 - match + round) % (infoLeague.l_teamNumber-1);
+                            if (match == 0)
                             {
-                                home = (round + match) % (infoLeague.l_teamNumber - 1);
-                                guess = (infoLeague.l_teamNumber - 1 - match + round) % (infoLeague.l_teamNumber - 1);
+                                guess = infoLeague.l_teamNumber - 1;
+                            }
+                            var vs = new Vs();
+                            if(round < halfSeason)
+                            {
+                                vs.vs_homeX = allTeam[home];
+                                vs.vs_guessX = allTeam[guess];
                             }
                             else
                             {
-                                guess = (round + match) % (infoLeague.l_teamNumber - 1);
-                                home = (infoLeague.l_teamNumber - 1 - match + round) % (infoLeague.l_teamNumber - 1);
+                                vs.vs_homeX = allTeam[guess];
+                                vs.vs_guessX = allTeam[home];
                             }
-
-                            var vs = new Vs();
-                            vs.vs_home = allTeam[home];
-                            vs.vs_guess = allTeam[guess];
                             vs.vs_round = idRound;
-                            vs.vs_stadium = allTeam[home].t_stadium;
+                            vs.vs_stadium = vs.vs_homeX.t_stadium;
                             vs.vs_date = rnd.r_start.AddDays(match % dateStep).AddMinutes(60 * 17);
+                            vs.vs_league = leagueID;
                             //insert.....
                             LeagueService.InsertVS(vs);
                         }
@@ -213,16 +242,65 @@ namespace FootballCompetition.Controllers.Admin
                 else
                 {
                     return Json(new { Result = "failure", Mess = "Not Enough" });
-                   
+
                 }
 
             }
             catch (Exception ex)
             {
                 return Json(new { Result = "error" });
-                
+
             }
 
+        }
+        public ActionResult Round(int leagueID )
+        {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            ViewBag.ID = leagueID;
+            return View();
+        }
+        public ActionResult VsOfRound(int indexRound)
+        {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            if (TempData.ContainsKey("anw"))
+            {
+                ViewBag.anw = TempData["anw"].ToString();
+            }
+            ViewBag.ID = indexRound;
+            return View();
+        }
+        public ActionResult AllVs(int leagueID)
+        {
+            ViewBag.ID = leagueID;
+            return View();
+        }
+
+        public ActionResult UpdateScored(Vs vs)
+        {
+            var adminInfo = (LoginModel)Session["AdminInfo"];
+            if (adminInfo == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            try
+            {
+                LeagueService.UpdateScored(vs);
+                TempData["anw"] = $"updated";
+                return RedirectToAction("VsOfRound", new { indexRound=vs.vs_round });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

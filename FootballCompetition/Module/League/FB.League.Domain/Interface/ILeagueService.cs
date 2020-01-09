@@ -25,6 +25,10 @@ namespace FB.League.Domain.Interface
 
         int CreateOneStadium(Stadium stadium);
         bool InsertVS(Vs vs);
-
+        IEnumerable<Round> GetAllRound(DatatableReq obj);
+        IEnumerable<Vs> GetAllVs(DatatableReq obj);
+        IEnumerable<Vs> GetVsOfRound(DatatableReq obj);
+        bool UpdateScored(Vs vs);
+        Stadium GetOneStadiumByID(int id);
     }
 }

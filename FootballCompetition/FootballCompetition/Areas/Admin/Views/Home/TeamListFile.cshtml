@@ -145,6 +145,7 @@
 
     var datatable;
     var dataSet = [];
+    var total;
     let id = $('#leagueID').val();
     $(document).ready(function () {
 
@@ -161,6 +162,7 @@
                             dataSet = raw;
                             if (typeof raw.meta !== 'undefined') {
                                 $('#total').html(raw.meta.total);
+                                total = raw.meta.total;
                             }
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
@@ -236,7 +238,7 @@
 
         datatable.reload();
     });
-
+    
     function Del() {
        let chkCheckeds = datatable.find('input[type=checkbox]:checked');
 
@@ -293,6 +295,9 @@
     }
 
     function Generate() {
+        if (!confirm(`are you sure that you want to generate ${total} teams?`)) {
+                return;
+            }
          $.ajax({
                 type: 'POST',
                 url: '/Admin/Home/Generate',
@@ -304,7 +309,7 @@
                 success: function (result) {
                     console.log(result);
                     if (result.Result == "successfull") {
-                        datatable.reload();
+                        alert("ok");
                     }
                     else {
                         if (result.Result == "failure") {

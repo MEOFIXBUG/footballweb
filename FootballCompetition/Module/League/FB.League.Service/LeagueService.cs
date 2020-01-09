@@ -154,5 +154,86 @@ namespace FB.League.Service
                 return false;
             }
         }
+        public IEnumerable<Round> GetAllRound(DatatableReq obj)
+        {
+
+            try
+            {
+                return LeagueRepository.GetAllRound(obj);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+        public IEnumerable<Vs> GetAllVs(DatatableReq obj)
+        {
+            try
+            {
+                var result= LeagueRepository.GetAllVs(obj);
+                foreach (var item in result)
+                {
+                    item.vs_homeX = LeagueRepository.GetOneTeamByID(item.vs_home);
+                    item.vs_guessX = LeagueRepository.GetOneTeamByID(item.vs_guess);
+                    item.vs_homeName = item.vs_homeX.t_NAME;
+                    item.vs_guessName = item.vs_guessX.t_NAME;
+                    item.vs_stadiumName = LeagueRepository.GetOneStadiumByID(item.vs_stadium).s_name;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+        public IEnumerable<Vs> GetVsOfRound(DatatableReq obj)
+        {
+            try
+            {
+                var result = LeagueRepository.GetVsOfRound(obj);
+                foreach (var item in result)
+                {
+                    item.vs_homeX = LeagueRepository.GetOneTeamByID(item.vs_home);
+                    item.vs_guessX = LeagueRepository.GetOneTeamByID(item.vs_guess);
+                    item.vs_homeName = item.vs_homeX.t_NAME;
+                    item.vs_guessName = item.vs_guessX.t_NAME;
+                    item.vs_stadiumName = LeagueRepository.GetOneStadiumByID(item.vs_stadium).s_name;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+        public bool UpdateScored(Vs vs)
+        {
+            try
+            {
+                vs.vs_goalDiff = vs.vs_homeScore - vs.vs_guessScore;
+                vs.vs_goalTotal = vs.vs_homeScore + vs.vs_guessScore;
+                return LeagueRepository.UpdateScored(vs);
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+        public Stadium GetOneStadiumByID(int id)
+        {
+            try
+            {
+                return LeagueRepository.GetOneStadiumByID(id);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
     }
 }
